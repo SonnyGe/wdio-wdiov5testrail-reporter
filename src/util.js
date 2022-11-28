@@ -14,11 +14,7 @@ module.exports.startup = function startup() {
   });
 };
 
-module.exports.cleanup = function cleanup(config) {
-  const options = config.reporters.find(
-    (reporter) => reporter[0] === 'wdiov5testrail',
-  )[1];
-
+module.exports.cleanup = function cleanup(options) {
   const files = fs.readdirSync('./testrailResults');
   const rawResults = [];
   files.forEach((file) => {
@@ -28,7 +24,7 @@ module.exports.cleanup = function cleanup(config) {
       );
     }
   });
-  del.sync('./testrailResults');
+//   del.sync('./testrailResults');
 
   if (rawResults.length === 0) {
     console.log(
